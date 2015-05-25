@@ -22,7 +22,7 @@ $(document).ready(function(){
         if((key === "40" || key === "83") && player.direction !== "up") player.direction = "down";
         else if((key === "39" || key === "68") && player.direction !== "left") player.direction = "right";
         else if((key === "38" || key === "87") && player.direction !== "down") player.direction = "up";
-		else if((key === "37" || key ==="65") && player.direction !== "right") player.direction = "left";
+	else if((key === "37" || key ==="65") && player.direction !== "right") player.direction = "left";
     });
     
     
