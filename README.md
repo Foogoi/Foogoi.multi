@@ -1,3 +1,4 @@
 # Foogoi.github.io
 
-Final Project
+Read the Project Proposal. 
+(It was written in LaTeX.)
