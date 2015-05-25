@@ -1,3 +1,1 @@
-$(document).ready(function(){
-    $('div').fadeOut('slow');
-});
+console.log("hi");
