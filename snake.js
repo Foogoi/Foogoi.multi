@@ -1,34 +1,21 @@
-$(document).ready(function(){
+$(document).ready(function () {
     var field = $("#field").getContext('2d');
     var width = $("#field").width();
     var height = $("#field").height();
-    var apples = new Object();
+    var apples = {};
     var box = 20;
     var increase = 0;
-    width = width/box;
-    height = height/box;
+    width = width / box;
+    height = height / box;
     
-    function setup () {
-        var player = new snake('black');
-        food();
-        setInterval(repeat, 50);
-    }
     
-    setup();
     
-    //controls mapping
-    $(document).keydown(function(stuff){
-        var key = stuff.which;
-        if((key === "40" || key === "83") && player.direction !== "up") player.direction = "down";
-        else if((key === "39" || key === "68") && player.direction !== "left") player.direction = "right";
-        else if((key === "38" || key === "87") && player.direction !== "down") player.direction = "up";
-	else if((key === "37" || key ==="65") && player.direction !== "right") player.direction = "left";
-    });
+    
     
     
     
     //snake "class"
-    function snake (color) {
+    function Snake(color) {
         //basic properties of a snake
         this.direction = "down";
         this.score = 0;
@@ -120,10 +107,29 @@ $(document).ready(function(){
         field.rect(coorx*box,coory*box,box,box);
         field.strokeRect(coorx*box,coory*box,box,box);
     }
+
+    
+    function setup () {
+        var player = new Snake('black');
+        food();
+        setInterval(repeat, 50);
+    }
+    
+    setup();
+
+    //controls mapping
+    $(document).keydown(function(stuff){
+        var key = stuff.which;
+        if((key === "40" || key === "83") && player.direction !== "up") player.direction = "down";
+        else if((key === "39" || key === "68") && player.direction !== "left") player.direction = "right";
+        else if((key === "38" || key === "87") && player.direction !== "down") player.direction = "up";
+	else if((key === "37" || key ==="65") && player.direction !== "right") player.direction = "left";
+    });
+        
+        
+          
+        
 });
-        
-        
-        
         
         
         
