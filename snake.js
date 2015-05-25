@@ -57,10 +57,10 @@ $(document).ready(function(){
         var currx = player.body[0].x;
         var curry = player.body[0].y; // huhuhuhu Curry ... slice that spice ;)
         //updating coordinates of new box to add to snake
-        if(player.direction ==="up") {curry++};
-        else if (player.direction==="down"){curry--};
-        else if (player.direction==="right"){currx++};
-        else if (player.direction==="left"){currx--};
+        if(player.direction ==="up") curry++;
+        else if (player.direction==="down")curry--;
+        else if (player.direction==="right")currx++;
+        else if (player.direction==="left")currx--;
         
         var temp_coordinates = {x:currx, y:curry};
         //checking if the coordinates are valid
@@ -71,7 +71,7 @@ $(document).ready(function(){
             }
         }
         
-        if(currx=-1||currx=width||curry=-1||curry=height){
+        if(currx===-1||currx===width||curry===-1||curry===height){
             setup();
             return;
         }
