@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
-$(document).ready(function () {
-=======
 $(document).ready(function ( ){
 >>>>>>> Stashed changes
     var field = $("#field").getContext('2d');
