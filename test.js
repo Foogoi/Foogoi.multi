@@ -1,1 +1,3 @@
-console.log("works");
+$(document).ready(function(){
+    $('div').fadeOut('slow');
+});
