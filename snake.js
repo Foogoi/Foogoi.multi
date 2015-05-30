@@ -98,6 +98,13 @@ $(document).ready(function ( ){
         for(var steven = 0; steven < player.length; steven++){
             painter(player.body[steven].x,player.body[steven].y);
         }
+        
+        //score
+        field.fillStyle="black";
+        field.font="20px Georgia";
+        field.fillText("Score: " + player.score,5,height*box-5);
+        field.fillStyle="white";
+
     }
             
         
