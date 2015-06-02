@@ -57,16 +57,14 @@ $(document).ready(function ( ){
         //checking if the coordinates are valid
         for(var stiven = 0; stiven < player.length; stiven++){
             if(temp_coordinates.x == player.body[stiven].x && temp_coordinates.y == player.body[stiven].y){
-                alert("Play Again?");
-                setup();
+                reset();
                 return;
             }
         }
         
         
         if(currx<=-1||currx>=width||curry<=-1||curry>=height){
-            alert("Play Again?");
-            setup();
+            reset();
             return;
         }
         
@@ -110,7 +108,14 @@ $(document).ready(function ( ){
         
         
             
+    //reset function
     
+    function reset(){
+        alert("Play Again?");
+        setup();
+        return;
+    }
+        
     
     //mini painting function
     function painter(coorx, coory){
@@ -124,13 +129,15 @@ $(document).ready(function ( ){
 
     
     function setup () {
+        clearInterval(myVar);
         player = new Snake('black');
         //initializing the body of the snake
         for (var c = player.length - 1; c >= 0; c--){
             player.body.push({x:1,y:c});
         }
         food();
-        setInterval(repeat, speed);
+        var myVar = setInterval(function(){ repeat() }, speed);
+        myVar;
     }
     
     setup();
