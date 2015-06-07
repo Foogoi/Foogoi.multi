@@ -32,7 +32,7 @@ $(document).ready(function ( ){
     
     //food maker
     function food () {
-        apples = {x:Math.round((width - 1)*Math.random()), y:Math.round((height-1)*Math.random())}
+        apples = {x:Math.round((width - 1)*Math.random()), y:Math.round((height-1)*Math.random()), color:"red"}
     }
     
     //function that repeats and paints stuff
@@ -91,7 +91,7 @@ $(document).ready(function ( ){
             food();
         }
         //painting food
-        painter(apples.x,apples.y);
+        painter(apples.x,apples.y, apples.color);
         
         
         player.body.unshift(temp_coordinates);
@@ -109,7 +109,7 @@ $(document).ready(function ( ){
         
         //painting  player body
         for(var steven = 0; steven < player.length; steven++){
-            painter(player.body[steven].x,player.body[steven].y);
+            painter(player.body[steven].x,player.body[steven].y, player.color);
         }
         
         //score
@@ -134,12 +134,12 @@ $(document).ready(function ( ){
         
     
     //mini painting function
-    function painter(coorx, coory){
-        field.fillStyle="black"; // make this player.color later
+    function painter(coorx, coory, boxcolor){
+        field.fillStyle= boxcolor; // make this player.color later
         field.strokeStyle="white";
         field.fillRect(coorx*box,coory*box,box,box);
         field.strokeRect(coorx*box,coory*box,box,box);
-        field.fillStyle="white"; // make this player.color later
+        field.fillStyle="white"; 
         field.strokeStyle="black";
     }
 

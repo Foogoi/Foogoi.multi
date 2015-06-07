@@ -33,7 +33,7 @@ $(document).ready(function ( ){
     
     //food maker
     function food () {
-        apples = {x:Math.round((width - 1)*Math.random()), y:Math.round((height-1)*Math.random())}
+        apples = {x:Math.round((width - 1)*Math.random()), y:Math.round((height-1)*Math.random()), color:"red"}
     }
     
     //function that repeats and paints stuff
@@ -47,7 +47,7 @@ $(document).ready(function ( ){
         
         
         //painting food
-        painter(apples.x,apples.y);
+        painter(apples.x,apples.y, apples.color);
         
         movement(player);
         //movement(player2);
@@ -69,7 +69,7 @@ $(document).ready(function ( ){
     function minipainter(snake_name){
         //painting  player body
         for(var steven = 0; steven < snake_name.length; steven++){
-            painter(snake_name.body[steven].x,snake_name.body[steven].y);
+            painter(snake_name.body[steven].x,snake_name.body[steven].y, snake_name.color);
         }
     }
     
@@ -147,8 +147,8 @@ $(document).ready(function ( ){
         
     
     //mini painting function
-    function painter(coorx, coory){
-        field.fillStyle="black"; // make this player.color later
+    function painter(coorx, coory, boxcolor){
+        field.fillStyle=boxcolor; // make this player.color later
         field.strokeStyle="white";
         field.fillRect(coorx*box,coory*box,box,box);
         field.strokeRect(coorx*box,coory*box,box,box);
@@ -164,7 +164,7 @@ $(document).ready(function ( ){
             player.body.push({x:1,y:c});
         }
         
-        player2 = new Snake('black', "up");
+        player2 = new Snake('blue', "up");
         //initializing the body of the snake
         for (var c = player2.length; c > 0; c--){
             player2.body.push({x:(width-2),y:(height-c)});
