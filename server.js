@@ -13,13 +13,17 @@ function init() {
 }
 
 init();
+socket = io.listen(8080);
 
-socket = io.listen(8000);
+console.log("Multiplayer app listening on port 8080");
 
-socket.configure(function() {
+
+/*socket.configure(function() {
     socket.set("transports", ["websocket"]);
     socket.set("log level", 2);
 });
+*/
+
 
 
 
