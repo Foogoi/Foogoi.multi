@@ -48,7 +48,7 @@ $(document).ready(function ( ){
         painter(apples.x,apples.y);
         
         movement(player);
-        movement(player2);
+        //movement(player2);
         
         minipainter(player);
         minipainter(player2);
