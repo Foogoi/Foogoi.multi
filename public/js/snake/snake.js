@@ -13,8 +13,9 @@ $(document).ready(function ( ){
     var currx = 0;
     var speed = 150;
     var interval = null;
+    var temp_direction = null;
     
-    
+  
     
     
     
@@ -53,7 +54,20 @@ $(document).ready(function ( ){
         else if (player.direction==="right")currx++;
         else if (player.direction==="left")currx--;
         
+        
         var temp_coordinates = {x:currx, y:curry};
+        
+        if (temp_coordinates.x == player.body[1].x && temp_coordinates.y == player.body[1].y) {
+            currx = player.body[0].x;
+            curry = player.body[0].y;
+            player.direction = temp_direction;
+            if(player.direction ==="up") curry--;
+            else if (player.direction==="down")curry++;
+            else if (player.direction==="right")currx++;
+            else if (player.direction==="left")currx--;
+        }
+        
+        temp_coordinates = {x:currx, y:curry};
         
         //checking if the coordinates are valid
         for(var stiven = 0; stiven < player.length; stiven++){
@@ -145,10 +159,11 @@ $(document).ready(function ( ){
     //controls mapping
     $(document).keydown(function(stuff){
         var key = stuff.which;
-        if((key == "40" || key == "83") && player.direction !== "up") player.direction = "down";
-        else if((key == "39" || key == "68") && player.direction !== "left") player.direction = "right" ;
-        else if((key == "38" || key == "87") && player.direction !== "down") player.direction = "up";
-        else if((key == "37" || key =="65") && player.direction !== "right") player.direction = "left";
+        temp_direction = player.direction;
+        if((key == "40" || key == "83") && temp_direction !== "up") player.direction = "down";
+        else if((key == "39" || key == "68") && temp_direction !== "left") player.direction = "right" ;
+        else if((key == "38" || key == "87") && temp_direction !== "down") player.direction = "up";
+        else if((key == "37" || key =="65") && temp_direction !== "right") player.direction = "left";
     });
         
         
