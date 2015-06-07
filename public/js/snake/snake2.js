@@ -13,6 +13,7 @@ $(document).ready(function ( ){
     var curry = 0;
     var currx = 0;
     var speed = 150;
+    var interval = null;
     
     
     
@@ -56,7 +57,7 @@ $(document).ready(function ( ){
         
         //score
         field.fillStyle="black";
-        field.font="20px Georgia";
+        field.font=box+"px Georgia";
         field.fillText("Score: " + player.score,5,height*box-5);
         field.fillText("Score: " + player2.score, 5, height*box - (box + 5));
         field.fillStyle="white";
@@ -125,7 +126,7 @@ $(document).ready(function ( ){
     
     function reset(){
         alert("Play Again?");
-        clearInterval();
+        clearInterval(interval);
         setup();
         return;
     }
@@ -143,7 +144,6 @@ $(document).ready(function ( ){
 
     
     function setup () {
-        clearInterval(myVar);
         player = new Snake('black', "down");
         //initializing the body of the snake
         for (var c = player.length - 1; c >= 0; c--){
@@ -157,8 +157,7 @@ $(document).ready(function ( ){
         }
         
         food();
-        var myVar = setInterval(function(){ repeat() }, speed);
-        myVar;
+        interval = setInterval(function(){ repeat() }, speed);
     }
     
     setup();
