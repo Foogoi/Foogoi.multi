@@ -6,7 +6,7 @@ var Snake = function (color, direction) {
         score: 0,
         color: color,
         length: 5,
-        body: []
+        body: [],
         id: id
     }
     
