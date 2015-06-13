@@ -1,80 +1,47 @@
-var express = require('express'),
-    app = express(),
-    server = require('http').Server(app),
-    util = require('util'),
-    io = require('socket.io')(server),
-    Player = require("./player").Player;
+/**
+ * @author Alvin Lin (alvin.lin@stuypulse.com)
+ * Copyright 2015. All Rights Reserved. Permission granted for code use.
+ */
+var PORT_NUMBER = process.env.PORT || 5000;
+var FRAME_RATE = 1000.0 / 60.0;
 
-var socket,
-    players;
+var app = require('express')();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
-//initializing an array of players
-function init() {
-    players = []
-};
+app.set('port', PORT_NUMBER);
 
-init();
-socket = io.listen(8080);
-
-console.log("Multiplayer app listening on port 8080");
-
-function events () {
-    socket.sockets.on("connection", onSocketConnect);
-};
-
-function onSocketConnect () {
-    util.log("New player id: " + client.id);
-    client.on("disconnect", onPlayerDisconnect);
-    client.on("new player", onNewPlayer);
-    client.on("move player", onMovePlayer);
-};
-
-function onPlayerDisconnect() {
-    util.log("Player has disconnected: "+this.id);
-};
-
-function onNewPlayer(data) {
-    var newPlayer = new Player(data.color, data.direction);
-    newPlayer.id = this.id;
-    
-    //emitting new player to everyone
-    this.broadcast.emit("new player", {id: newPlayer.id, body:newPlayer.body});
-    //emitting everyone to new player
-    var temp_player;
-    for(var i = 0; i < players.length; i++) {
-        temp_player = players[i];
-        this.emit("new player", {id: temp_player.id, body:temp_player.body});
-    }
-    players.push(newPlayer);
-    
-};
-
-function onMovePlayer(stuff) {
-
-};
-
-
-
-
-
-/*socket.configure(function() {
-    socket.set("transports", ["websocket"]);
-    socket.set("log level", 2);
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/public/index.html');
 });
-*/
 
+app.get('/*', function(req, res) {
+  res.sendFile(__dirname + '/public' + req.path);
+});
 
+// Server side input handler, modifies the state of the players and the
+// game based on the input it receives. Everything runs synchronously with
+// the game loop.
+io.on('connection', function(socket) {
+  // When a new player joins, the server sends his/her unique ID back so
+  // for future identification purposes.
+  socket.on('new-player', function(data) {
+    // Store players
+    // @todo for Shantanu
+  });
 
-
+  socket.on('move-player', function(data) {
+    game.updatePlayer(socket.id, data.keyboardState, data.turretAngle);
+  });
+});
 
 /*
-app.use(express.static(__dirname + '/public'));
- 
-
-app.get('/', function(req, res){
-  res.render('/index.html');
-});
- 
-
-console.log("Multiplayer app listening on port 8080");
+// Server side game loop, runs at 60Hz and sends out update packets to all
+// clients every tick.
+setInterval(function() {
+  game.update(io);
+}, FRAME_RATE);
 */
+http.listen(PORT_NUMBER, function() {
+  console.log('Listening to port ' + PORT_NUMBER);
+});

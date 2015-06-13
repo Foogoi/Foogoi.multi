@@ -24,4 +24,4 @@ var Snake = function (color, direction) {
     */
 };
 
-exports.Player = Snake;
+exports.Snake = Snake;
